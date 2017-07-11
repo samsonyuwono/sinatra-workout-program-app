@@ -1,0 +1,7 @@
+<h3>You exercises for today's workout, <%= @user.username %> </h3>
+<br>
+<% @exercises.each do |e| %>
+<%= e.name %>
+<%= e.repitition %>
+<%= e.sets %>
+<% end %>

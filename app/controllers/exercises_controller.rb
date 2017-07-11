@@ -4,7 +4,7 @@ class ExercisesController < ApplicationController
     if Helper.logged_in?(session)
       @exercises = Exercises.all
       @user = Helper.current_user(session)
-      erb:'/users/show'
+      erb :'users/show'
     else
       redirect to "/login"
     end
@@ -24,8 +24,7 @@ class ExercisesController < ApplicationController
     user = Helper.current_user(session)
   if params[:name].empty? || params[:repititons].empty? ||
      params[:sets].empty?
-    @exercise= Exercises.create(name: params[:name], repititions:
-    params[:repititions], sets: params[:sets])
+    @exercise= Exercises.create(:name => params[:name], :repititions=> params[:repititions], :sets=> params[:sets])
     @exercise.user= user
     @exercise.save
   else
@@ -33,6 +32,7 @@ class ExercisesController < ApplicationController
     end
     redirect("/exercises/#{@exercise.id}")
   end
+
 #show
   get '/exercises/:id' do
     if Helper.logged_in?(session)
@@ -42,6 +42,7 @@ class ExercisesController < ApplicationController
       redirect "/login"
     end
   end
+
 #edit
   patch '/exercises/:id' do
     @exercise= Exercises.find_by_id(params[:id])
@@ -51,6 +52,7 @@ class ExercisesController < ApplicationController
     @exercise.save
     redirect to "/exercises/#{@exercise.id}"
   end
+
 #delete
   delete '/exercises/:id' do
     @exercise= Exercises.find_by_id(params[:id])
