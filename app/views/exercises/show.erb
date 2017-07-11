@@ -1,8 +1,12 @@
+<!-- show 1 exercise -->
 <h1>Show Exercise</h1>
 <h2>Exercise name: <%=@exercise.name%></h2>
 <p>Reps= <%=@exercise.repetition%></p>
 <p>Sets= <%=@exercise.sets%></p>
 
 <form action="/exercises/<%=@exercise.id" method="post">
-
+  <input id="hidden" type="hidden" name="_method" value="edit">
+  <input  id="delete" type="submit" value="edit">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input  id="delete" type="submit" value="delete">
 </form>

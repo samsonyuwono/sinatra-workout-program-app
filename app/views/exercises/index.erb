@@ -2,7 +2,7 @@
 <br>
 <h5>Below are you exercises for today's workout</h5>
 <br>
-<% @exercise.each do |e| %>
+<% @exercise.all.each do |e| %>
 <%= e.name %>
 <%= e.repetition %>
 <%= e.sets %>

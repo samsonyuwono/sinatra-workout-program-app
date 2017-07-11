@@ -1,7 +1,7 @@
-<h3>You exercises for today's workout, <%= @user.username %> </h3>
+<h3>Your exercises for today's workout, <%= @user.username %> </h3>
 <br>
 <% @exercises.each do |e| %>
-<%= e.name %>
-<%= e.repetition %>
-<%= e.sets %>
+<h4>Exercise Name: <%= e.name %> </h4>
+<p>Repetitions= <%= e.repetition %> </p>
+<p>Sets= <%= e.sets %> </p>
 <% end %>
