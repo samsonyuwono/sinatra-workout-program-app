@@ -31,7 +31,7 @@ class ExercisesController < ApplicationController
   else
     redirect "exercises/new"
     end
-    redirect("/exercises/#{exercise.id}")
+    redirect("/exercises/#{@exercise.id}")
   end
 #show
   get '/exercises/:id' do

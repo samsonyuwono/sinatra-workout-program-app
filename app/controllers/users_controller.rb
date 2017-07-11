@@ -22,7 +22,6 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    @error_message = params[:error]
     if Helper.logged_in?(session)
       redirect to "/excercises"
     else
