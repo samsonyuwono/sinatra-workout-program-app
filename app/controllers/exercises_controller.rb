@@ -21,15 +21,14 @@ class ExercisesController < ApplicationController
 
   #create
   post '/exercises' do
-    user = Helper.current_user(session)
-  if params[:name].empty? || params[:repititons].empty? ||
-     params[:sets].empty?
-    @exercise= Exercises.create(:name => params[:name], :repititions=> params[:repititions], :sets=> params[:sets])
+    @user = Helper.current_user(session)
+  # if params[:name].empty? || params[:repetitons].empty? ||
+  #    params[:sets].empty?
+    @exercise= Exercises.create(:name => params[:name], :repetitions=> params[:repetitions], :sets=> params[:sets])
     @exercise.user= user
     @exercise.save
-  else
-    redirect to "exercises/new"
-    end
+  # else
+  #   redirect to "exercises/new"
     redirect("/exercises/#{@exercise.id}")
   end
 

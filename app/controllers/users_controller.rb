@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       erb :'users/new'
     end
   end
-
+#signup
   post '/signup' do
     if params[:username].empty? || params[:password].empty? ||
        params[:email].empty?
