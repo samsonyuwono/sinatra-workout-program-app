@@ -9,7 +9,9 @@
 
           <a href="/exercises/new"> Create Exercise</a>
           <a href="/logout"> Log Out </a>
-          <p>Welcome, <%=@user.username %></p>
+          <p>Welcome, <%=Helper.current_user(session).username %></p>
+
+         
 
         <%end %>
 
