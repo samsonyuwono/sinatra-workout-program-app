@@ -4,6 +4,16 @@
   <title>Your daily workout program</title>
 </head>
   <body>
+      <nav>
+        <% if Helper.logged_in?(session) %>
+
+          <a href="/exercises/new"> Create Exercise</a>
+          <a href="/logout"> Log Out </a>
+          <p>Welcome, <%=@user.username %></p>
+
+        <%end %>
+
+      </nav>
     <div class="container">
       <% if !@error_message.nil? %>
       <div class="alert alert-warning">

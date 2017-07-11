@@ -15,7 +15,7 @@ class ExercisesController < ApplicationController
     if Helper.logged_in?(session)
       erb :'exercises/new'
     else
-      redirect "/login"
+      redirect to "/login"
     end
   end
 
@@ -29,7 +29,7 @@ class ExercisesController < ApplicationController
     @exercise.user= user
     @exercise.save
   else
-    redirect "exercises/new"
+    redirect to "exercises/new"
     end
     redirect("/exercises/#{@exercise.id}")
   end
@@ -57,6 +57,5 @@ class ExercisesController < ApplicationController
     @exercise.delete
     redirect to "/exercises"
   end
-
 
 end
