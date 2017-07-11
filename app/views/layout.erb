@@ -7,10 +7,11 @@
       <nav>
         <% if Helper.logged_in?(session) %>
 
+          <a href="/exercises">Account Home</a>
           <a href="/exercises/new"> Create Exercise</a>
           <a href="/logout"> Log Out </a>
           <p>Welcome, <%=Helper.current_user(session).username %></p>
-        
+
         <%end %>
 
       </nav>

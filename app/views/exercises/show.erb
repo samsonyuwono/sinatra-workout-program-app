@@ -1,8 +1,7 @@
 <h1>Show Exercise</h1>
-<h2><%=@exercise.name%></h2>
-
-<p><%@exercise.repition%></p>
-<p><%@exercise.sets%></p>
+<h2>Exercise name: <%=@exercise.name%></h2>
+<p>Reps= <%=@exercise.repetition%></p>
+<p>Sets= <%=@exercise.sets%></p>
 
 <form action="/exercises/<%=@exercise.id" method="post">
 
