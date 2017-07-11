@@ -22,10 +22,12 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
+    @error_message = params[:error]
     if Helper.logged_in?(session)
       redirect to "/excercises"
     else
       erb :'users/login'
+    end
   end
 
   post '/login' do
@@ -35,6 +37,15 @@ class UsersController < ApplicationController
       redirect to "/exercises"
     else
       redirect to "/login"
+    end
+  end
+
+  get '/logout' do
+    if session[:user_id] != nil
+      session.destroy
+      redirect to '/login'
+    else
+      redirect to '/'
     end
   end
 
