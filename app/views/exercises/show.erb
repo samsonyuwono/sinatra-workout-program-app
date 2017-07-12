@@ -5,8 +5,8 @@
 <p>Sets= <%=@exercise.sets%></p>
 
 <form action="/exercises/<%=@exercise.id" method="post">
-  <input id="hidden" type="hidden" name="_method" value="edit">
-  <input  id="delete" type="submit" value="edit">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input  id="delete" type="submit" value="Edit">
   <input id="hidden" type="hidden" name="_method" value="delete">
-  <input  id="delete" type="submit" value="delete">
+  <input  id="delete" type="submit" value="Delete">
 </form>

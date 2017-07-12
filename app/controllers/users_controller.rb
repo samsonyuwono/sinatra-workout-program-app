@@ -9,12 +9,10 @@ class UsersController < ApplicationController
   end
 #signup
   post '/signup' do
-    if params[:username].empty? || params[:password].empty? ||
-       params[:email].empty?
+    if params[:username].empty? || params[:password].empty?
       redirect "/signup"
     else
-      user= User.new(username: params[:username], password: params[:password],
-      email: params[:email])
+      user= User.new(username: params[:username], password: params[:password])
       user.save
       session[:user_id]= user.id
       redirect "/exercises"
@@ -41,7 +39,7 @@ class UsersController < ApplicationController
 
   get '/logout' do
     if session[:user_id] != nil
-      session.destroy
+      session.clear
       redirect to '/login'
     else
       redirect to '/'

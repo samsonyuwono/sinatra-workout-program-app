@@ -4,7 +4,7 @@ class ExercisesController < ApplicationController
     if Helper.logged_in?(session)
       @exercises = Exercises.all
       @user = Helper.current_user(session)
-      erb :'users/show'
+      erb :'/exercises/exercises'
     else
       redirect to "/login"
     end
@@ -22,8 +22,8 @@ class ExercisesController < ApplicationController
   #create
   post '/exercises' do
     @user = Helper.current_user(session)
-    @exercise= Exercises.create(:name => params[:name], :repetition=> params[:repetition],
-    :sets=> params[:sets])
+    @exercise= Exercises.create(:name => params[:name], :repetition=>
+    params[:repetition], :sets=> params[:sets])
     redirect("/exercises/#{@exercise.id}")
   end
 
@@ -38,20 +38,25 @@ class ExercisesController < ApplicationController
   end
 
 #edit
+  get "/exercises/:id/edit" do
+    @exercise= Exercises.find_by_id(params[:id])
+    erb :edit
+  end
+
   patch '/exercises/:id' do
     @exercise= Exercises.find_by_id(params[:id])
     @exercise.name = params[:name]
     @exercise.repetition= params[:repetitions]
     @exercise.sets= params[:sets]
     @exercise.save
-    redirect to "/exercises/#{@exercise.id}"
+    redirect "/exercises/#{@exercise.id}"
   end
 
 #delete
-  delete '/exercises/:id' do
+  delete '/exercises/:id/delete' do
     @exercise= Exercises.find_by_id(params[:id])
-    @exercise.delete
-    redirect to "/exercises"
+    @exercise.destroy
+    redirect "/exercises"
   end
 
 end
