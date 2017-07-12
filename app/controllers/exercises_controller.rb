@@ -44,25 +44,25 @@ end
 
 #edit
   get '/exercises/:id/edit' do
-    @exercise= Exercises.find_by_id(params[:id])
-    erb :edit
+    @exercise= Exercise.find_by_id(params[:id])
+    erb :'/exercises/edit'
   end
 
   patch '/exercises/:id' do
-    raise @exercise.inspect
-    @exercise= Exercises.find_by_id(params[:id])
+    @exercise= Exercise.find_by_id(params[:id])
     @exercise.name = params[:name]
     @exercise.repetition= params[:repetition]
     @exercise.sets= params[:sets]
     @exercise.save
-    redirect to "/exercises/#{@exercise.id}"
+    redirect to "/exercises/#{@exercise.id}/edit"
   end
 
 #delete
-  post '/exercises/:id/delete' do
-  @exercise = Exercises.find_by_id(params[:id])
-  if @exercise.user == Helper.current_user(session)
-     @exercise.delete
+  delete '/exercises/:id/delete' do
+  @exercise = Exercise.find_by_id(params[:id])
+  if @user.exercises == Helper.current_user(session)
+     @user.exercises.delete
+     binding.pry
   else
      redirect "/login"
   end

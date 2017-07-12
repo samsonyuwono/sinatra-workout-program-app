@@ -2,10 +2,10 @@
 <h1>Welcome, <%=Helper.current_user(session).username %></h1>
 <br>
 <h3>Below are your exercises for today's workout</h3>
-<% @exercises.each do |e| %>
-<h4></a>Exercise Name: <%= e.name %> </h4>
-<p>Repetitions= <%= e.repetition %></p>
-<p>Sets= <%= e.sets %></p>
-
-
+<% @exercises.each do |exercise| %>
+<h4></a>Exercise Name: <%= exercise.name %> </h4>
+<p>Repetitions= <%= exercise.repetition %></p>
+<p>Sets= <%= exercise.sets %></p>
+ <a href="/exercises/<%=exercise.id%>/edit">Edit</a>
+ <a href="/exercises/<%=exercise.id%>/delete">Delete</a>
 <% end %>
