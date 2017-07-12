@@ -4,7 +4,11 @@
 <p>Reps= <%=@exercise.repetition%></p>
 <p>Sets= <%=@exercise.sets%></p>
 
-<form action="/exercises/<%=@exercise.id%>/delete" method="POST">
-  <input  id="delete" type="submit" value="Delete">
-</form>
 <a href="/exercises/<%=@exercise.id%>/edit">Edit Exercise</a>
+<a href="/exercises">View Program</a>
+<br>
+</br>
+<form action="/exercises/<%= @exercise.id %>/delete" method="POST">
+<input id="hidden" type="hidden" name="_method" value="delete">
+<input  id="delete" type="submit" value="Delete Exercise">
+</form>

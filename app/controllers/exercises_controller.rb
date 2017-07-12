@@ -49,23 +49,24 @@ end
   end
 
   patch '/exercises/:id' do
+    if Helper.logged_in?(session)
+    @user = Helper.current_user(session)
     @exercise= Exercise.find_by_id(params[:id])
     @exercise.name = params[:name]
     @exercise.repetition= params[:repetition]
     @exercise.sets= params[:sets]
     @exercise.save
-    redirect to "/exercises/#{@exercise.id}/edit"
+    redirect "/exercises/#{@exercise.id}"
+    else
+      redirect "/exercises"
+    end
   end
 
 #delete
   delete '/exercises/:id/delete' do
-  @exercise = Exercise.find_by_id(params[:id])
-  if @user.exercises == Helper.current_user(session)
-     @user.exercises.delete
-     binding.pry
-  else
-     redirect "/login"
-  end
-end
+    @exercise = Exercise.find_by_id(params[:id])
+    @exercise.delete
+    redirect to "/exercises"
+   end
 
 end
