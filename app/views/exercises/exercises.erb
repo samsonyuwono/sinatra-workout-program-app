@@ -1,17 +1,11 @@
 <!-- show all exercises -->
-<h1>Welcome, <%=@user.username %></h1>
+<h1>Welcome, <%=Helper.current_user(session).username %></h1>
 <br>
 <h3>Below are your exercises for today's workout</h3>
 <% @exercises.each do |e| %>
-<h4>Exercise Name: <%= e.name %> </h4>
+<h4></a>Exercise Name: <%= e.name %> </h4>
 <p>Repetitions= <%= e.repetition %></p>
 <p>Sets= <%= e.sets %></p>
 
-<% end %>
 
-<form action="/exercises/<%=@exercise.id" method="post">
-  <input id="hidden" type="hidden" name="_method" value="patch">
-  <input  id="delete" type="submit" value="Edit">
-  <input id="hidden" type="hidden" name="_method" value="delete">
-  <input  id="delete" type="submit" value="Delete">
-</form>
+<% end %>

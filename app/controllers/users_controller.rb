@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   get '/login' do
     if Helper.logged_in?(session)
-      redirect "/excercises"
+      redirect "/exercises"
     else
       erb :'users/login'
     end
