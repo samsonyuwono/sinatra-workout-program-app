@@ -1,4 +1,9 @@
+require 'sinatra/base'
+require 'rack-flash'
+
 class ExercisesController < ApplicationController
+  enable :sessions
+  use Rack::Flash
   #index
   get '/exercises' do
   if Helper.logged_in?(session)
@@ -26,8 +31,10 @@ end
     @exercise = @user.exercises.build(:name => params[:name], :repetition=>
     params[:repetition], :sets=> params[:sets])
     if @exercise.save
+      flash[:message]= "Successfully created exercise!"
       redirect("/exercises/#{@exercise.id}")
     else
+      flash[:message]= "Something must be wrong, pelase try again."
       redirect '/exercises/new'
     end
   end

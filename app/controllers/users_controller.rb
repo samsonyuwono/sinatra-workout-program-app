@@ -1,5 +1,10 @@
-class UsersController < ApplicationController
+require 'sinatra/base'
+require 'rack-flash'
 
+class UsersController < ApplicationController
+  enable :sessions
+  use Rack::Flash
+  
   get '/signup' do
     if Helper.logged_in?(session)
       redirect "/exercises"
