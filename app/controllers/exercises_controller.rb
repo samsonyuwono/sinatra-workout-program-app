@@ -77,14 +77,14 @@ end
 #delete
   delete '/exercises/:id/delete' do
     @user = Helper.current_user(session)
-    if @user.exercises == Helper.current_user(session)
+    # if @user.exercises == Helper.current_user(session)
     @exercise = Exercise.find_by_id(params[:id])
     @exercise.delete
+      flash[:message]= "Sucessfully deleted exercise!"
       redirect to "/exercises"
-      flash[:message]= "Sucessfully deleted exercise."
-    else
-      redirect "/login"
-   end
+    # else
+      # redirect "/login"
+  #  end
  end
 
 end
