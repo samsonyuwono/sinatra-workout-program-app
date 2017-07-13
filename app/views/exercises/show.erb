@@ -1,4 +1,7 @@
 <!-- show 1 exercise -->
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
 <h1>Exercise</h1>
 <h2>Exercise name: <%=@exercise.name%></h2>
 <p>Reps= <%=@exercise.repetition%></p>

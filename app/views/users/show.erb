@@ -1,3 +1,6 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
 <h3>Your exercises for today's workout, <%= @user.username %> </h3>
 <br>
 <% @exercises.each do |e| %>

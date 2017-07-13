@@ -5,7 +5,6 @@ class Helper
 
   def self.redirect_if_not_logged_in
     if !self.logged_in?(session)
-      binding.pry
       redirect "/login?error= You have to be logged in to do that"
     end
   end

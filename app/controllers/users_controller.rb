@@ -4,7 +4,7 @@ require 'rack-flash'
 class UsersController < ApplicationController
   enable :sessions
   use Rack::Flash
-  
+
   get '/signup' do
     if Helper.logged_in?(session)
       redirect "/exercises"
@@ -15,11 +15,13 @@ class UsersController < ApplicationController
 #signup
   post '/signup' do
     if params[:username].empty? || params[:password].empty?
+      flash[:message]= "Oops, something must have went wrong"
       redirect "/signup"
     else
       user= User.new(username: params[:username], password: params[:password])
       user.save
       session[:user_id]= user.id
+      flash[:message]= "You have successfully created a new account!"
       redirect "/exercises"
     end
   end
@@ -36,8 +38,10 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id]= @user
+      flash[:message]= "You have successfully logged in!"
       redirect "/exercises"
     else
+      flash[:message]= "Error: Your username and password don't match."
       redirect to "/login"
     end
   end
@@ -45,6 +49,7 @@ class UsersController < ApplicationController
   get '/logout' do
     if session[:user_id] != nil
       session.clear
+      flash[:message]= "You have successfully logged out"
       redirect to '/login'
     else
       redirect to '/'

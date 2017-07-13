@@ -34,7 +34,7 @@ end
       flash[:message]= "Successfully created exercise!"
       redirect("/exercises/#{@exercise.id}")
     else
-      flash[:message]= "Something must be wrong, pelase try again."
+      flash[:message]= "Error: Something must be wrong, please try again."
       redirect '/exercises/new'
     end
   end
@@ -58,13 +58,16 @@ end
   patch '/exercises/:id' do
     @user = Helper.current_user(session)
     if @user.exercises == Helper.current_user(session)
+    @user = Helper.current_user(session)
       @exercise= Exercise.find_by_id(params[:id])
       @exercise.name = params[:name]
       @exercise.repetition= params[:repetition]
       @exercise.sets= params[:sets]
       @exercise.save
+      flash[:message]= "Successfully edited exercise!"
       redirect "/exercises/#{@exercise.id}"
     else
+      flash[:message]= "Error: Something must be wrong, please try again."
       redirect "/login"
     end
   end
@@ -76,6 +79,7 @@ end
     @exercise = Exercise.find_by_id(params[:id])
     @exercise.delete
       redirect to "/exercises"
+      flash[:message]= "Sucessfully deleted exercise."
     else
       redirect "/login"
    end

@@ -1,3 +1,6 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
 <h1>Sign up here for your Workout program app</h1>
 <form action="/signup" method="POST">
   <label for="username">Username:</label><input type="text" name="username">
