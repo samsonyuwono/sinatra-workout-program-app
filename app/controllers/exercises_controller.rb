@@ -51,14 +51,17 @@ end
 
 #edit
   get '/exercises/:id/edit' do
-    @exercise= Exercise.find_by_id(params[:id])
-    erb :'/exercises/edit'
+    if Helper.logged_in?(session)
+      @user= Helper.current_user(session)
+      @exercise= Exercise.find_by_id(params[:id])
+      erb :'/exercises/edit'
+    else
+      redirect "/"
+    end
   end
 
   patch '/exercises/:id' do
-    @user = Helper.current_user(session)
-    if @user.exercises == Helper.current_user(session)
-    @user = Helper.current_user(session)
+    if Helper.current_user(session).id= session[:user_id]
       @exercise= Exercise.find_by_id(params[:id])
       @exercise.name = params[:name]
       @exercise.repetition= params[:repetition]
@@ -67,8 +70,7 @@ end
       flash[:message]= "Successfully edited exercise!"
       redirect "/exercises/#{@exercise.id}"
     else
-      flash[:message]= "Error: Something must be wrong, please try again."
-      redirect "/login"
+      redirect "/exercises"
     end
   end
 
