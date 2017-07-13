@@ -6,6 +6,7 @@ class ExercisesController < ApplicationController
   use Rack::Flash
   #index
   get '/exercises' do
+
   if Helper.logged_in?(session)
     @user = Helper.current_user(session)
     @exercises = @user.exercises
@@ -31,10 +32,10 @@ end
     @exercise = @user.exercises.build(:name => params[:name], :repetition=>
     params[:repetition], :sets=> params[:sets])
     if @exercise.save
-      flash[:message]= "Successfully created exercise!"
+      flash[:message]= "Successfully created exercise!" #working
       redirect("/exercises/#{@exercise.id}")
     else
-      flash[:message]= "Error: Something must be wrong, please try again."
+      flash[:message]= "Error: Something must be wrong, please try again." #working
       redirect '/exercises/new'
     end
   end
@@ -49,10 +50,10 @@ end
     end
   end
 
-#edit
+#edit can edit everything
   get '/exercises/:id/edit' do
     if Helper.logged_in?(session)
-      @user= Helper.current_user(session)
+      @user= session[:user_id]
       @exercise= Exercise.find_by_id(params[:id])
       erb :'/exercises/edit'
     else
@@ -67,24 +68,24 @@ end
       @exercise.repetition= params[:repetition]
       @exercise.sets= params[:sets]
       @exercise.save
-      flash[:message]= "Successfully edited exercise!"
+      flash[:message]= "Successfully edited exercise!" #working
       redirect "/exercises/#{@exercise.id}"
     else
       redirect "/exercises"
     end
   end
 
-#delete
+#delete- can delete everything
   delete '/exercises/:id/delete' do
     @user = Helper.current_user(session)
-    # if @user.exercises == Helper.current_user(session)
+    if session[:user_id]== Helper.current_user(session)
     @exercise = Exercise.find_by_id(params[:id])
     @exercise.delete
-      flash[:message]= "Sucessfully deleted exercise!"
+      flash[:message]= "Sucessfully deleted exercise!" #working
       redirect to "/exercises"
-    # else
-      # redirect "/login"
-  #  end
+    else
+      redirect "/login"
+   end
  end
 
 end
