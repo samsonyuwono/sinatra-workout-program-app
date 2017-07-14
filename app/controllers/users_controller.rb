@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   post '/signup' do
     if params[:username].empty? || params[:password].empty?
       flash[:message]= "Oops, something must have went wrong"
-      redirect "/signup"
+      redirect "users/new"
     else
       user= User.new(username: params[:username], password: params[:password])
       user.save
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
   get '/logout' do
     if session[:user_id] != nil
       session.clear
-      flash[:message]= "You have successfully logged out" 
+      flash[:message]= "You have successfully logged out"
       erb :'users/login'
     else
       redirect to '/'
