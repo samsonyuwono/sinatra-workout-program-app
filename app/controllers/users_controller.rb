@@ -49,7 +49,7 @@ class UsersController < ApplicationController
   get '/logout' do
     if session[:user_id] != nil
       session.clear
-      flash[:message]= "You have successfully logged out"
+      flash[:message]= "You have successfully logged out!"
       erb :'users/login'
     else
       redirect to '/'
