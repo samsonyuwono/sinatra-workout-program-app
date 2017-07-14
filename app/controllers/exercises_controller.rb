@@ -6,7 +6,6 @@ class ExercisesController < ApplicationController
   use Rack::Flash
   #index
   get '/exercises' do
-
     if Helper.logged_in?(session)
       @user = Helper.current_user(session)
       @exercises = @user.exercises
@@ -15,7 +14,6 @@ class ExercisesController < ApplicationController
       redirect to "/login"
     end
   end
-
   #new
   get '/exercises/new' do
     if Helper.logged_in?(session)
@@ -25,7 +23,6 @@ class ExercisesController < ApplicationController
       redirect to "/login"
     end
   end
-
   #create
   post '/exercises' do
     @user = Helper.current_user(session)
@@ -39,7 +36,6 @@ class ExercisesController < ApplicationController
       redirect '/exercises/new'
     end
   end
-
 #show
   get '/exercises/:id' do
     if Helper.logged_in?(session)
@@ -49,7 +45,6 @@ class ExercisesController < ApplicationController
       redirect "/login"
     end
   end
-
 #edit
   get '/exercises/:id/edit' do
     if Helper.logged_in?(session)
@@ -80,20 +75,19 @@ class ExercisesController < ApplicationController
       redirect "/exercises"
     end
   end
-
 #delete- can delete everything
 delete '/exercises/:id/delete' do
   if Helper.logged_in?(session)
     @exercise= Exercise.find_by_id(params[:id])
     if Helper.current_user(session)== @exercise.user
       @exercise.delete
-    end
-  flash[:message]= "Sucessfully deleted exercise!"
-  redirect to "/exercises"
+      flash[:message]= "Sucessfully deleted exercise!"
+      redirect to "/exercises"
   else
-    flash[:message]= "You have to be logged in to do that."
-    redirect "/login"
- end
+    flash[:message]= "You can't do that. That exercise does not belong to you."
+    redirect "/exercises"
+    end
+  end
 end
 
 

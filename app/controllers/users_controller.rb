@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       redirect "/exercises"
     end
   end
-
+#login
   get '/login' do
     if Helper.logged_in?(session)
       redirect "/exercises"
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
       redirect to "/login"
     end
   end
-
+#logout
   get '/logout' do
     if session[:user_id] != nil
       session.clear
