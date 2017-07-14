@@ -15,13 +15,13 @@ class UsersController < ApplicationController
 #signup
   post '/signup' do
     if params[:username].empty? || params[:password].empty?
-      flash[:message]= "Oops, something must have went wrong" #not working
+      flash[:message]= "Oops, something must have went wrong"
       redirect "/signup"
     else
       user= User.new(username: params[:username], password: params[:password])
       user.save
       session[:user_id]= user.id
-      flash[:message]= "You have successfully created a new account!" #not working
+      flash[:message]= "You have successfully created a new account!"
       redirect "/exercises"
     end
   end
@@ -41,6 +41,7 @@ class UsersController < ApplicationController
       flash[:message]= "You have successfully logged in!"
       redirect "/exercises"
     else
+      flash[:message]= "Error: Username and Password don't match."
       redirect to "/login"
     end
   end
@@ -48,8 +49,8 @@ class UsersController < ApplicationController
   get '/logout' do
     if session[:user_id] != nil
       session.clear
-      flash[:message]= "You have successfully logged out" #not showing
-      redirect to '/login'
+      flash[:message]= "You have successfully logged out" 
+      erb :'users/login'
     else
       redirect to '/'
     end

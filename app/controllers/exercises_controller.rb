@@ -7,14 +7,14 @@ class ExercisesController < ApplicationController
   #index
   get '/exercises' do
 
-  if Helper.logged_in?(session)
-    @user = Helper.current_user(session)
-    @exercises = @user.exercises
-    erb :'/exercises/exercises'
-  else
-    redirect to "/login"
+    if Helper.logged_in?(session)
+      @user = Helper.current_user(session)
+      @exercises = @user.exercises
+      erb :'/exercises/exercises'
+    else
+      redirect to "/login"
+    end
   end
-end
 
   #new
   get '/exercises/new' do
@@ -50,42 +50,51 @@ end
     end
   end
 
-#edit can edit everything
+#edit
   get '/exercises/:id/edit' do
     if Helper.logged_in?(session)
-      @user= session[:user_id]
       @exercise= Exercise.find_by_id(params[:id])
-      erb :'/exercises/edit'
+      if Helper.current_user(session)== @exercise.user
+        erb :'/exercises/edit'
+      else
+        redirect "/exercises"
+      end
     else
-      redirect "/"
+      redirect "/login"
     end
   end
 
   patch '/exercises/:id' do
-    if Helper.current_user(session).id= session[:user_id]
+    if Helper.logged_in?(session)
+      @exercise= Exercise.find_by_id(params[:id])
+      if Helper.current_user(session)== @exercise.user
       @exercise= Exercise.find_by_id(params[:id])
       @exercise.name = params[:name]
       @exercise.repetition= params[:repetition]
       @exercise.sets= params[:sets]
       @exercise.save
-      flash[:message]= "Successfully edited exercise!" #working
+      flash[:message]= "Successfully edited exercise!"
       redirect "/exercises/#{@exercise.id}"
+      end
     else
       redirect "/exercises"
     end
   end
 
 #delete- can delete everything
-  delete '/exercises/:id/delete' do
-    @user = Helper.current_user(session)
-    if session[:user_id]== Helper.current_user(session)
-    @exercise = Exercise.find_by_id(params[:id])
-    @exercise.delete
-      flash[:message]= "Sucessfully deleted exercise!" #working
-      redirect to "/exercises"
-    else
-      redirect "/login"
-   end
+delete '/exercises/:id/delete' do
+  if Helper.logged_in?(session)
+    @exercise= Exercise.find_by_id(params[:id])
+    if Helper.current_user(session)== @exercise.user
+      @exercise.delete
+    end
+  flash[:message]= "Sucessfully deleted exercise!"
+  redirect to "/exercises"
+  else
+    flash[:message]= "You have to be logged in to do that."
+    redirect "/login"
  end
+end
+
 
 end
