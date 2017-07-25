@@ -18,35 +18,26 @@ class ExercisesController < ApplicationController
 
   post '/exercises' do
     authenticate_user!
-    @exercise = current_user.exercises.build(params))
+    @exercise = current_user.exercises.build(params)
     if @exercise.save
       flash[:message]= "Successfully created exercise!" #working
       redirect("/exercises/#{@exercise.id}")
     else
       flash[:message]= "Error: Something must be wrong, please try again." #working
       redirect '/exercises/new'
-    end
+      end
   end
 
   get '/exercises/:id' do
     authenticate_user!
       @exercise = Exercise.find_by_id(params[:id])
       erb :'exercises/show'
-    else
-      redirect "/login"
-    end
   end
 
   get '/exercises/:id/edit' do
     authenticate_user!
-      if @exercise = current_user.exercises.find_by(id: params[:id])
-        erb :'/exercises/edit'
-      else
-        redirect "/exercises"
-      end
-    else
-      redirect "/login"
-    end
+    if @exercise = current_user.exercises.find_by(id: params[:id])
+      erb :'/exercises/edit'
   end
 
   patch '/exercises/:id' do
@@ -76,4 +67,5 @@ class ExercisesController < ApplicationController
       redirect "/exercises"
     end
   end
+end
 end
