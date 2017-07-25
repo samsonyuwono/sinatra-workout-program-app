@@ -5,7 +5,7 @@
 </head>
   <body>
       <nav>
-        <% if Helper.logged_in?(session) %>
+        <% if logged_in? %>
           <a href="/exercises">View Program</a>
           <a href="/exercises/new"> Create Exercise</a>
           <a href="/logout"> Log Out </a>
