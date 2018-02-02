@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   use Rack::Flash
 
   get '/signup' do
-    if Helper.logged_in?(session)
+    if logged_in?
       redirect "/exercises"
     else
       erb :'users/new'
@@ -20,14 +20,14 @@ class UsersController < ApplicationController
     else
       user= User.new(username: params[:username], password: params[:password])
       user.save
-      session[:user_id]= user.id
-      flash[:message]= "You have successfully created a new account!"
+      session[:user_id] = user.id
+      flash[:message] = "You have successfully created a new account!"
       redirect "/exercises"
     end
   end
 #login
   get '/login' do
-    if Helper.logged_in?(session)
+    if logged_in?
       redirect "/exercises"
     else
       erb :'users/login'
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   post '/login' do
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
-      session[:user_id]= @user
+      session[:user_id] = @user.id
       flash[:message]= "You have successfully logged in!"
       redirect "/exercises"
     else
