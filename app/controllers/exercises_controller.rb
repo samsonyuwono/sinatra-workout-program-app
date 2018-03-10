@@ -18,7 +18,7 @@ class ExercisesController < ApplicationController
 
   post '/exercises' do
     authenticate_user!
-    @exercise = current_user.exercises.build(params)
+    @exercise = current_user.exercises.build(:name => params[:name], :repetition => params[:repetition], :sets => params[:sets])
     if @exercise.save
       flash[:message]= "Successfully created exercise!" #working
       redirect("/exercises/#{@exercise.id}")
@@ -36,14 +36,14 @@ class ExercisesController < ApplicationController
 
   get '/exercises/:id/edit' do
     authenticate_user!
-    if @exercise = current_user.exercises.find_by(id: params[:id])
-      erb :'/exercises/edit'
+    @exercise = current_user.exercises.find_by(id: params[:id])
+    erb :'/exercises/edit'
   end
 
   patch '/exercises/:id' do
     authenticate_user!
     if @exercise = current_user.exercises.find_by(id: params[:id])
-      if @exercise.update(params)
+      if @exercise.update(:name => params[:name], :repetition => params[:repetition], :sets => params[:sets])
         flash[:message]= "Successfully edited exercise!"
         redirect "/exercises/#{@exercise.id}"
       else
@@ -65,7 +65,6 @@ class ExercisesController < ApplicationController
     else
       flash[:message]= "You can't do that. That exercise does not belong to you."
       redirect "/exercises"
+      end
     end
   end
-end
-end

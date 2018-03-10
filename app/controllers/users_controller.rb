@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       erb :'users/new'
     end
   end
-#signup
+
   post '/signup' do
     if params[:username].empty? || params[:password].empty?
       flash[:message]= "Oops, something must have went wrong"
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       redirect "/exercises"
     end
   end
-#login
+
   get '/login' do
     if logged_in?
       redirect "/exercises"
