@@ -18,7 +18,7 @@ class ExercisesController < ApplicationController
 
   post '/exercises' do
     authenticate_user!
-    @exercise = current_user.exercises.build(:name => params[:name], :repetition => params[:repetition], :sets => params[:sets])
+    @exercise = current_user.exercises.build(:name => params[:name], :repetition => params[:repetition], :sets => params[:sets], :weight => params[:weight])
     if @exercise.save
       flash[:message]= "Successfully created exercise!" #working
       redirect("/exercises/#{@exercise.id}")
@@ -43,7 +43,7 @@ class ExercisesController < ApplicationController
   patch '/exercises/:id' do
     authenticate_user!
     if @exercise = current_user.exercises.find_by(id: params[:id])
-      if @exercise.update(:name => params[:name], :repetition => params[:repetition], :sets => params[:sets])
+      if @exercise.update(:name => params[:name], :repetition => params[:repetition], :sets => params[:sets], :weight => params[:weight])
         flash[:message]= "Successfully edited exercise!"
         redirect "/exercises/#{@exercise.id}"
       else
