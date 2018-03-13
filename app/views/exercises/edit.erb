@@ -3,12 +3,18 @@
 <% end %>
 <h1>Edit Exercise</h1>
 <form action="/exercises/<%=@exercise.id%>" method="POST">
+  <div class="form-group">
    <input id="hidden" type="hidden" name="_method" value="patch">
-   <ul>
-     <p>Exercise name</p><input type="text" name="name" value="<%=@exercise.name%>">
-     <p>Repetition</p><input type="number" name="repetition" value="<%@exercise.repetition%>">
-     <p>Sets</p><input id="sets" type="number" name="sets" value="<%=@exercise.sets%>">
-     <p>Weight</p><input id="weight" type="text" name="weight" value="<%=@exercise.weight%>">
-     <input type="submit" name="submit" value="Edit Exercise">
-   </ul>
+     <label>Exercise name</label>
+     <input type="text" class="form-control" name="name" value="<%=@exercise.name%>">
+     <label>Repetition</label>
+     <input type="number" class="form-control" name="repetition" value="<%@exercise.repetition%>">
+     <label>Sets</label>
+     <input class="form-control" type="number" name="sets" value="<%=@exercise.sets%>">
+     <label>Weight</label>
+     <input class="form-control" type="text" name="weight" value="<%=@exercise.weight%>">
+     <label>Notes</label>
+     <input type="text" class="form-control" name="notes">
+     <button type="submit" class="btn btn-primary" name="submit" value="Edit Exercise">Edit</button>
+   </div>
 </form>

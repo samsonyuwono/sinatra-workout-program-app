@@ -3,5 +3,6 @@ class Exercise < ActiveRecord::Base
   validates :name, presence: true
   validates :repetition, presence: true
   validates :sets, presence: true
+  validates :weight, presence: true
 
 end
