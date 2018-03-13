@@ -9,15 +9,40 @@
   <link href="/css/bootstrap-responsive.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
   integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  
+  <style  type="text/css">
+  body {
+    background-image:url('/img/bigstock.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    background-position: right;
+  }
+
+  .navbar-inverse a {
+     color: #808080;
+     font-size: 25px;
+     padding-right: 30px;
+   }
+
+  .navbar-inverse a:hover {
+    text-decoration: none;
+   color: white;
+  }
+
+  </style>
 </head>
 <body>
-  <nav>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
     <% if logged_in? %>
     <a href="/exercises">View Program</a>
     <a href="/exercises/new"> Create Exercise</a>
     <a href="/logout"> Log Out </a>
+    <% else %>
+    <a href="/signup">Sign-Up</a>
+    <a href="/login">Login</a>
     <%end %>
+  </div>
 
   </nav>
   <div class="container">
