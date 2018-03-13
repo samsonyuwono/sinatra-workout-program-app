@@ -1,18 +1,30 @@
-<!-- show 1 exercise -->
 <% if flash.has?(:message) %>
-  <%= flash[:message] %>
+<%= flash[:message] %>
 <% end %>
-<h1>Exercise</h1>
-<h2>Exercise name: <%=@exercise.name%></h2>
-<p>Reps= <%=@exercise.repetition%></p>
-<p>Sets= <%=@exercise.sets%></p>
-<p>Weight= <%=@exercise.weight%></p>
 
-<a href="/exercises/<%=@exercise.id%>/edit">Edit Exercise</a>
-<a href="/exercises">View Program</a>
-<br>
-</br>
-<form action="/exercises/<%= @exercise.id %>/delete" method="POST">
-<input id="hidden" type="hidden" name="_method" value="delete">
-<input  id="delete" type="submit" value="Delete Exercise">
-</form>
+<h1>Exercise</h1>
+<div class="row">
+  <div class="col-xs-6 col-md-4">
+    <table class="table">
+      <th class="active">Exercise name: <%=@exercise.name%></th>
+      <tr class="active"><td>Reps: <%=@exercise.repetition%></td></tr>
+      <tr class="active"><td>Sets: <%=@exercise.sets%></td></tr>
+      <tr class="active"><td>Weight: <%=@exercise.weight%></td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="buttons">
+  <button type="button" class="btn btn-primary">
+    <a href="/exercises/<%=@exercise.id%>/edit">Edit Exercise</a>
+  </button>
+  <button type="button" class="btn btn-primary">
+    <a href="/exercises">View Program</a></button>
+  </div>
+
+  <br></br>
+
+  <form action="/exercises/<%= @exercise.id %>/delete" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input  id="delete" type="submit" value="Delete Exercise">
+  </form>

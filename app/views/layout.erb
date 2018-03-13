@@ -21,20 +21,42 @@
   .navbar-inverse a {
      color: #808080;
      font-size: 25px;
+     padding-left: 30px;
      padding-right: 30px;
    }
 
   .navbar-inverse a:hover {
     text-decoration: none;
-   color: white;
+    color: white;
   }
+
+  .navbar-inverse a {
+     color: #808080;
+     font-size: 25px;
+     padding-left: 30px;
+     padding-right: 30px;
+   }
+
+   .buttons a {
+     text-decoration: none;
+     color: black;
+   }
+
+   .row {
+     padding-top: 20px;
+   }
+
+   .table .active {
+     font-size: 15px;
+   }
+
 
   </style>
 </head>
 <body>
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
-    <% if logged_in? %>
+    <% !!if logged_in? %>
     <a href="/exercises">View Program</a>
     <a href="/exercises/new"> Create Exercise</a>
     <a href="/logout"> Log Out </a>

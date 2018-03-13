@@ -1,7 +1,7 @@
 <% if flash.has?(:message) %>
   <%= flash[:message] %>
 <% end %>
-<h1>Login here to view your current workout program</h1>
+<h1>Login</h1>
 <form action="/login" method="POST">
   <label for="username">Username:</label><input type="text" name="username">
   <label for="password">Password:</label><input type="password" name="password">

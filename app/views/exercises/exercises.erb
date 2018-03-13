@@ -1,17 +1,31 @@
 <% if flash.has?(:message) %>
-  <%= flash[:message] %>
+<%= flash[:message] %>
 <% end %>
-<!-- show all exercises -->
-<h1>Welcome, <%= current_user.username %></h1>
-<br>
-<h3>Below are your exercises for today's workout</h3>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>Welcome, <%= current_user.username %></h1>
+    <br>
+    <h3>Below are your exercises for today's workout</h3>
+  </div>
+</div>
+
 <% @exercises.each do |exercise| %>
+<div class="row">
+  <div class="col-xs-6 col-md-4">
+  <table class="table">
+  <th class="active">Exercise Name: <%= exercise.name %></th>
+    <tr class="active"><td>Repetitions: <%= exercise.repetition %></td></tr>
+    <tr class="active"><td>Sets: <%= exercise.sets %></td></tr>
+    <tr class="active"><td>Weight: <%= exercise.weight %></td></tr>
+  </table>
+  </div>
+</div>
 
-<h4></a>Exercise Name: <%= exercise.name %> </h4>
-<p>Repetitions= <%= exercise.repetition %></p>
-<p>Sets= <%= exercise.sets %></p>
-<p>Weight= <%= exercise.weight %></p>
-
- <a href="/exercises/<%=exercise.id%>/edit">Edit</a>
- <a href="/exercises/<%=exercise.id%>">View Exercise</a>
-<% end %>
+<div class="buttons">
+  <button type="button" class="btn btn-primary">
+    <a href="/exercises/<%=exercise.id%>/edit">Edit</a></button>
+    <button type="button" class="btn btn-primary">
+      <a href="/exercises/<%=exercise.id%>">View Exercise</a></button>
+    </div>
+    <% end %>
