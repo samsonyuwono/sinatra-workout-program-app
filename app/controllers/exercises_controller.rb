@@ -1,7 +1,9 @@
 require 'sinatra/base'
+require 'rack-flash'
 
 class ExercisesController < ApplicationController
   enable :sessions
+  use Rack::Flash
 
   get '/exercises' do
     authenticate_user!
