@@ -11,7 +11,7 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem 'tux'
-gem 'pg'
+gem 'pg', '~> 0.21'
 
 group :test do
   gem 'rspec'
@@ -19,4 +19,8 @@ group :test do
   gem 'rack-test'
   gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
   gem 'rack-flash3'
+end
+
+group :development do
+  gem 'sqlite3'
 end
