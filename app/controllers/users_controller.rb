@@ -1,9 +1,7 @@
 require 'sinatra/base'
-require 'rack-flash'
 
 class UsersController < ApplicationController
   enable :sessions
-  use Rack::Flash
 
   get '/signup' do
     if logged_in?
